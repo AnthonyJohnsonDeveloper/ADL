@@ -1,14 +1,21 @@
-import React from 'react';
-import { Text } from 'react-native';
-import ThemedView from './ThemedView';
+import React from "react";
+import ThemedView from "./ThemedView";
+import ChatComponent from "./ChatComponent.js"; // Import the ChatComponent
+import { Channel, MessageList, MessageInput } from "stream-chat-react-native"; // Import Stream Chat components
+import { useAppContext } from "./AppContext";
 
-const ChatScreen = () => {
+const ChannelScreen = () => {
+  const { channel } = useAppContext(); // Assuming you have a custom hook to access the channel from the context
+
   return (
-    <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Chat Screen</Text>
-    </ThemedView>
+    <Channel channel={channel}>
+      <MessageList />
+      <MessageInput />
+    </Channel>
   );
 };
 
-export default ChatScreen;
+export default ChannelScreen;
+
+
 

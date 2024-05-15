@@ -1,12 +1,20 @@
+// App.js
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import ParallaxScrollView from "./components/ParallaxScrollView";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons"; // Import MaterialIcons for icons
 import EventsMeetupScreen from "./components/EventsMeetupScreen.js";
 import ChatScreen from "./components/ChatScreen.js";
+import ParallaxScrollView from "./components/ParallaxScrollView";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from "@expo/vector-icons";
+import { View, Text, Image, StyleSheet } from "react-native";
+import ChannelListScreen from "./components/ChannelListScreen.js"; // Import ChannelListScreen
+import ChannelScreen from "./components/ChannelScreen.js"; // Import ChannelScreen
 
+
+
+
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
@@ -25,24 +33,26 @@ const App = () => {
               iconName = focused ? "chat" : "chat";
             }
 
-            return <MaterialIcons name={iconName} size={size} color={color} />;
+            return (
+              <MaterialIcons name={iconName} size={size} color={color} />
+            );
           },
         })}
       >
         <Tab.Screen
           name="Home"
           component={SplashScreen}
-          options={{ tabBarLabel: () => null }} // Hide the tab label
+          options={{ tabBarLabel: () => null }}
         />
         <Tab.Screen
           name="Events/Meetup"
           component={EventsMeetupScreen}
-          options={{ tabBarLabel: () => null }} // Hide the tab label
+          options={{ tabBarLabel: () => null }}
         />
         <Tab.Screen
           name="Chat"
           component={ChatScreen}
-          options={{ tabBarLabel: () => null }} // Hide the tab label
+          options={{ tabBarLabel: () => null }}
         />
       </Tab.Navigator>
     </NavigationContainer>
@@ -64,19 +74,18 @@ const SplashScreen = () => {
         <Text style={styles.text}>Welcome to the ADL Community App!</Text>
         <View style={styles.numberedList}>
           <Text style={styles.listItem}>
-            Meetup: Meetup with fellow ADL members at various motorsports events
-            such as FD or Final Bout
+            Meetup: Meetup with fellow ADL members at various motorsports
+            events such as FD or Final Bout
           </Text>
           <Text style={styles.listItem}>
-            Check-in: Check in to find out which members are attending events as
-            either a spectator or driver to show support for your fellow ADL
+            Check-in: Check in to find out which members are attending events
+            as either a spectator or driver to show support for your fellow ADL
             members{" "}
           </Text>
           <Text style={styles.listItem}>
             Chat: Everyone and their mother has Discord or Messenger, but does
             your community have its own app?{" "}
           </Text>
-          {/* Add more list items as needed */}
         </View>
       </View>
     </ParallaxScrollView>
@@ -91,21 +100,22 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 30,
-    backgroundColor: "#FFFF00", // Yellow background color
+    backgroundColor: "#FFFF00",
   },
   text: {
     fontSize: 30,
-    fontWeight: "bold", // Bold text
-    color: "#000000", // Black text color
+    fontWeight: "bold",
+    color: "#000000",
   },
   numberedList: {
     marginTop: 20,
   },
   listItem: {
     fontSize: 20,
-    color: "#000000", // Black text color
+    color: "#000000",
     marginBottom: 10,
   },
 });
 
 export default App;
+
